@@ -14,7 +14,7 @@ API_KEY = os.getenv("API_KEY")
 
 st.title("AI采购助手")
 st.markdown("此模型可用于咨询采购价格问题或其他问题。如有条件可前往：https://gemini.google.com/ 使用谷歌官方Gemini AI")
-st.caption("受免费API限制，每天询问次数有限。")
+st.caption("受免费API限制，每天询问次数有限。询问次数会在每天16:00点重置")
 # 定义角色预设
 SYSTEM_PROMPT = """You are a senior Global Strategic Sourcing and Supply Chain Expert. 
 Your role is to provide users with comprehensive price analyses for products both domestically and internationally. 
@@ -38,7 +38,8 @@ with st.sidebar:
     model_options = [
         "gemini-3-flash-preview", # 建议：支持多模态且速度快
         "gemini-2.5-flash",
-        "gemini-2.5-pro",
+        "gemini-2.5-flash-lite",
+        "gemini-2.5-flash-tts",
     ]
     
     selected_model = st.selectbox(
@@ -234,3 +235,4 @@ if prompt := st.chat_input("请输入您的问题..."):
             else:
 
                 st.error(f"⚠️ 发生错误: {error_str}")
+
