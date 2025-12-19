@@ -1,6 +1,7 @@
 import streamlit as st
 from google import genai
 from google.genai import types
+import os  # 导入os模块读取环境变量
 
 # --- 页面配置 ---
 st.set_page_config(
@@ -9,6 +10,7 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="expanded"
 )
+API_KEY = os.getenv("API_KEY")  
 
 st.title("AI采购助手")
 st.markdown("此模型可用于咨询采购价格问题或其他问题。如有条件可前往：https://gemini.google.com/ 使用谷歌官方Gemini AI")
@@ -22,7 +24,7 @@ with st.sidebar:
     st.header("⚙️ 设置")
     
     # 获取 API Key
-    api_key = "AIzaSyDusP_pOW5VviCOL0dkV1i8eqU55iKd1Sw" # 建议使用环境变量
+    api_key = API_KEY # 建议使用环境变量
     if not api_key:
         api_key = st.text_input("请输入 Gemini API Key", type="password", help="需要 Google AI Studio 的 API Key")
         if not api_key:
@@ -230,4 +232,5 @@ if prompt := st.chat_input("请输入您的问题..."):
             elif "Extra inputs" in error_str:
                 st.error("⚠️ **配置参数错误** (当前模型可能不支持图片或Thinking，请切换模型)")
             else:
+
                 st.error(f"⚠️ 发生错误: {error_str}")
