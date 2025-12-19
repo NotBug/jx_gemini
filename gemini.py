@@ -39,7 +39,7 @@ with st.sidebar:
         "gemini-3-flash-preview", # 建议：支持多模态且速度快
         "gemini-2.5-flash",
         "gemini-2.5-flash-lite",
-        "gemini-2.5-flash-tts",
+
     ]
     
     selected_model = st.selectbox(
@@ -235,4 +235,5 @@ if prompt := st.chat_input("请输入您的问题..."):
             else:
 
                 st.error(f"⚠️ 发生错误: {error_str}")
+
 
